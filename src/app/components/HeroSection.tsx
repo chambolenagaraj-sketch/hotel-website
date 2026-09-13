@@ -7,10 +7,10 @@ export const HeroSection = () => {
     <section className="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/hero.jpg')" }}
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000"
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=2000&q=85')" }}
       />
-      <div className="absolute inset-0 bg-black/40 bg-gradient-to-t from-slate-950 via-black/20 to-transparent" />
+      <div className="absolute inset-0 bg-black/50 bg-gradient-to-t from-slate-950 via-black/40 to-black/30" />
       
       {/* Content */}
       <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
