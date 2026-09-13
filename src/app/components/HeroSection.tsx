@@ -33,10 +33,11 @@ export const HeroSection = () => {
         </motion.p>
         
         <motion.button
+          onClick={() => document.getElementById('rooms')?.scrollIntoView({ behavior: 'smooth' })}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-          className="bg-amber-500 hover:bg-amber-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)]"
+          className="bg-amber-500 hover:bg-amber-400 text-slate-900 px-8 py-4 rounded-full text-lg font-medium transition-colors shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:shadow-[0_0_30px_rgba(245,158,11,0.6)] cursor-pointer"
         >
           Explore Rooms
         </motion.button>

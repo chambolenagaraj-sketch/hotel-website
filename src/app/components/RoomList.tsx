@@ -13,7 +13,7 @@ type Room = {
 
 export const RoomList = ({ rooms }: { rooms: Room[] }) => {
   return (
-    <section className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
+    <section id="rooms" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
