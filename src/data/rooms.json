@@ -3,24 +3,36 @@
     "id": "1",
     "name": "The Skyline Penthouse",
     "description": "Experience unparalleled luxury with panoramic city skyline views, a king-size bed, and modern elegant decor.",
+    "longDescription": "The Skyline Penthouse offers the ultimate urban retreat. Suspended high above the city, this magnificent suite features floor-to-ceiling windows that provide breathtaking, uninterrupted views of the metropolitan skyline. The expansive living area is adorned with bespoke furnishings, a state-of-the-art entertainment system, and a private dining space. The master bedroom boasts a plush king-size bed with premium linens, ensuring a restful night's sleep. The marble en-suite bathroom includes a deep soaking tub, a separate rainfall shower, and exclusive designer toiletries. Perfect for discerning travelers seeking sophistication and comfort.",
     "pricePerNight": 1200,
-    "amenities": ["City View", "King Bed", "Mini Bar", "Free WiFi", "Room Service"],
-    "imageUrl": "/images/room_penthouse.jpg"
+    "amenities": ["City View", "King Bed", "Mini Bar", "Free WiFi", "Room Service", "Soaking Tub"],
+    "imageUrl": "/images/room_penthouse.jpg",
+    "images": ["/images/room_penthouse.jpg", "/images/room_ocean.jpg", "/images/room_mountain.jpg"],
+    "policies": ["Check-in: 3:00 PM", "Check-out: 11:00 AM", "No Smoking", "No Pets Allowed"],
+    "maxGuests": 2
   },
   {
     "id": "2",
     "name": "Oceanfront Oasis",
     "description": "Wake up to the sound of waves in this bright and airy oceanfront room featuring a private balcony and infinity pool.",
+    "longDescription": "Immerse yourself in coastal elegance with the Oceanfront Oasis. This bright, airy suite is designed to seamlessly blend indoor luxury with the natural beauty of the ocean. Step out onto your expansive private balcony to feel the sea breeze and take a dip in your exclusive infinity edge plunge pool. Inside, the minimalist decor is complemented by organic textures and soothing color palettes. The suite features a luxurious king-size bed, a spacious lounging area, and a spa-inspired bathroom with a walk-in shower overlooking the water. It is the perfect sanctuary for relaxation and rejuvenation.",
     "pricePerNight": 850,
-    "amenities": ["Ocean View", "Private Pool", "Balcony", "Free WiFi", "Spa Access"],
-    "imageUrl": "/images/room_ocean.jpg"
+    "amenities": ["Ocean View", "Private Pool", "Balcony", "Free WiFi", "Spa Access", "Espresso Machine"],
+    "imageUrl": "/images/room_ocean.jpg",
+    "images": ["/images/room_ocean.jpg", "/images/room_penthouse.jpg", "/images/room_mountain.jpg"],
+    "policies": ["Check-in: 3:00 PM", "Check-out: 12:00 PM", "No Smoking", "Adults Only"],
+    "maxGuests": 2
   },
   {
     "id": "3",
     "name": "Mountain Retreat Suite",
     "description": "A cozy, ultra-luxurious suite with rustic chic decor, a private fireplace, and stunning snowy peak views.",
+    "longDescription": "Escape to the serene heights in our Mountain Retreat Suite. Combining rustic charm with ultra-luxurious amenities, this suite provides a warm and inviting atmosphere after a day of alpine adventures. The centerpiece of the living area is a beautiful stone fireplace, perfect for cozying up with a book or a glass of wine. Large windows frame spectacular views of the majestic snowy peaks. The suite includes a sumptuous king-size bed draped in premium faux fur throws, a rustic-chic wooden dining area, and an opulent bathroom featuring a heated floor and a jacuzzi tub. Enjoy direct ski-in/ski-out access during the winter months.",
     "pricePerNight": 950,
-    "amenities": ["Mountain View", "Fireplace", "King Bed", "Ski-in/Ski-out", "Free WiFi"],
-    "imageUrl": "/images/room_mountain.jpg"
+    "amenities": ["Mountain View", "Fireplace", "King Bed", "Ski-in/Ski-out", "Free WiFi", "Jacuzzi Tub"],
+    "imageUrl": "/images/room_mountain.jpg",
+    "images": ["/images/room_mountain.jpg", "/images/room_ocean.jpg", "/images/room_penthouse.jpg"],
+    "policies": ["Check-in: 4:00 PM", "Check-out: 11:00 AM", "Pet Friendly (fee applies)", "No Smoking"],
+    "maxGuests": 4
   }
 ]

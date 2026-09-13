@@ -1,17 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-
-type Room = {
-  id: string;
-  name: string;
-  description: string;
-  pricePerNight: number;
-  amenities: string[];
-  imageUrl: string;
-};
+import Link from "next/link";
+import { BookingModal } from "./BookingModal";
+import type { Room } from "../../types/room";
 
 export const RoomList = ({ rooms }: { rooms: Room[] }) => {
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openBookingModal = (room: Room) => {
+    setSelectedRoom(room);
+    setIsModalOpen(true);
+  };
+
   return (
     <section id="rooms" className="py-24 px-6 md:px-12 max-w-7xl mx-auto">
       <motion.div 
@@ -62,13 +65,27 @@ export const RoomList = ({ rooms }: { rooms: Room[] }) => {
                 ))}
               </div>
               
-              <button className="w-full py-3 bg-transparent border-2 border-slate-700 text-slate-200 rounded-xl hover:border-amber-500 hover:text-amber-400 transition-colors duration-300 font-medium tracking-wide">
-                View Details
-              </button>
+              <div className="flex gap-4 mt-auto">
+                <Link href={`/rooms/${room.id}`} className="flex-1 text-center py-3 bg-transparent border border-slate-700 text-slate-200 rounded-xl hover:border-amber-500 hover:text-amber-400 transition-colors duration-300 font-medium tracking-wide">
+                  View Details
+                </Link>
+                <button 
+                  onClick={() => openBookingModal(room)}
+                  className="flex-1 py-3 bg-amber-500 text-slate-900 rounded-xl hover:bg-amber-400 transition-colors duration-300 font-medium tracking-wide shadow-lg shadow-amber-500/20"
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
           </motion.div>
         ))}
       </div>
+      
+      <BookingModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        room={selectedRoom}
+      />
     </section>
   );
 };
