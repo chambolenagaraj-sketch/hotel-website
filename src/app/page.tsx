@@ -1,8 +1,17 @@
 import { HeroSection } from "./components/HeroSection";
 import { RoomList } from "./components/RoomList";
-import roomsData from "../data/rooms.json";
+import { supabase } from "../lib/supabaseClient";
+import type { Room } from "../types/room";
 
-export default function Home() {
+export default async function Home() {
+  const { data: rooms, error } = await supabase.from('rooms').select('*');
+  
+  if (error) {
+    console.error('Error fetching rooms:', error);
+  }
+
+  const roomsData = (rooms || []) as Room[];
+
   return (
     <main className="min-h-screen bg-slate-950 text-slate-50 font-sans">
       <HeroSection />

@@ -1,19 +1,25 @@
 import Link from "next/link";
-import roomsData from "../../../data/rooms.json";
+import { supabase } from "../../../lib/supabaseClient";
 import { BookingModalWrapper } from "./BookingModalWrapper";
 import type { Room } from "../../../types/room";
 
-export function generateStaticParams() {
-  return roomsData.map((room) => ({
-    id: room.id,
+export async function generateStaticParams() {
+  const { data: rooms } = await supabase.from('rooms').select('id');
+  return (rooms || []).map((room) => ({
+    id: room.id.toString(),
   }));
 }
 
-export default function RoomPage({ params }: { params: { id: string } }) {
-  const roomData = roomsData.find((r) => r.id === params.id);
+export default async function RoomPage({ params }: { params: { id: string } }) {
+  const { data: roomData, error } = await supabase
+    .from('rooms')
+    .select('*')
+    .eq('id', params.id)
+    .single();
+
   const room = roomData as Room;
 
-  if (!room) {
+  if (error || !room) {
     return <div className="min-h-screen flex items-center justify-center text-white">Room not found</div>;
   }
 

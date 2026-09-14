@@ -17,6 +17,9 @@ export const BookingModal = ({ isOpen, onClose, room }: BookingModalProps) => {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
   // Reset state when modal opens for a new room
   useEffect(() => {
     if (isOpen) {
@@ -25,6 +28,7 @@ export const BookingModal = ({ isOpen, onClose, room }: BookingModalProps) => {
       setGuests(1);
       setIsConfirmed(false);
       setTotalPrice(0);
+      setError(null);
     }
   }, [isOpen, room]);
 
@@ -45,10 +49,37 @@ export const BookingModal = ({ isOpen, onClose, room }: BookingModalProps) => {
     }
   }, [checkIn, checkOut, room]);
 
-  const handleBooking = (e: React.FormEvent) => {
+  const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (totalPrice > 0) {
+    if (totalPrice <= 0 || !room) return;
+    
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          roomId: room.id,
+          checkIn,
+          checkOut,
+          guests,
+          totalPrice,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit booking');
+      }
+
       setIsConfirmed(true);
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'An unexpected error occurred');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -160,12 +191,27 @@ export const BookingModal = ({ isOpen, onClose, room }: BookingModalProps) => {
                       <span className="text-slate-300">Total Price:</span>
                       <span className="text-2xl text-amber-400 font-medium">${totalPrice}</span>
                     </div>
+                    {error && (
+                      <div className="mb-4 text-red-400 text-sm bg-red-400/10 p-3 rounded-lg border border-red-400/20">
+                        {error}
+                      </div>
+                    )}
                     <button 
                       type="submit"
-                      disabled={totalPrice === 0}
-                      className="w-full bg-amber-500 hover:bg-amber-400 disabled:bg-slate-700 disabled:text-slate-500 text-slate-900 py-4 rounded-xl text-lg font-medium transition-colors"
+                      disabled={totalPrice === 0 || isSubmitting}
+                      className="w-full flex items-center justify-center bg-amber-500 hover:bg-amber-400 disabled:bg-slate-700 disabled:text-slate-500 text-slate-900 py-4 rounded-xl text-lg font-medium transition-colors"
                     >
-                      Confirm Booking
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-slate-900" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Processing...
+                        </>
+                      ) : (
+                        "Confirm Booking"
+                      )}
                     </button>
                   </div>
                 </form>
